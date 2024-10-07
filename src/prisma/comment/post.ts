@@ -5,19 +5,4 @@ export default async (data: {
     commentator: boolean
     messageData: Buffer
     messageVector: Buffer
-}) => prisma.reply.create({
-    data: {
-        ...data,
-        ...await prisma.comment.findUniqueOrThrow({
-            where: {
-                id: data.commentId
-            },
-            select: {
-                topicId: true
-            }
-        })
-    },
-    select: {
-        id: true
-    }
-}).then(({id}) => id)
+}) => prisma.reply.create({data, select: {id: true}}).then(({id}) => id)
