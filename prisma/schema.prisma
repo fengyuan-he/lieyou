@@ -15,7 +15,6 @@ model Topic {
   keyWrap   Bytes     @unique
   message   String
   Comment   Comment[]
-  Reply     Reply[]
 }
 
 model Comment {
@@ -33,8 +32,6 @@ model Comment {
 model Reply {
   Comment       Comment  @relation(fields: [commentId], references: [id])
   commentId     Int
-  Topic         Topic    @relation(fields: [topicId], references: [id])
-  topicId       Int
   id            Int      @id @default(autoincrement())
   createdAt     DateTime @default(now())
   commentator   Boolean
